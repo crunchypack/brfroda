@@ -1,57 +1,23 @@
+
 "use client"
-import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
-import { DotButton,useDotButton } from "./ImageDotButton"
-import useEmblaCarousel from 'embla-carousel-react'
-import {PrevButton,NextButton,
-  usePrevNextButtons} from "./ImageArrow"
 
-const ImageCarousel = ({slides, options}) => {
-  
- 
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+import { Carousel, Image } from "react-bootstrap";
+import { useState } from "react";
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi)
-
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick
-  } = usePrevNextButtons(emblaApi)
+const ImageCarousel = ({ slides }) => {
+  const [index, setIndex] = useState(0);
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  }
 
   return (
-    <section className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {slides.map((index) => (
-            <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">{index + 1}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="embla__controls">
-        <div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
-        <div className="embla__dots">
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
-              )}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+    <Carousel activeIndex={index} onSelect={handleSelect} >
+      {slides?.map((item) => {
+        return (<Carousel.Item>
+          <Image src={item.url} alt={item.alt} className="d-block banner w-100" />
+        </Carousel.Item>)
+      })}
+    </Carousel>
   )
 }
 
