@@ -1,6 +1,5 @@
-import React from 'react'
 
-const Footer = () => {
+const FooterComp = () => {
     return (
         <footer className='footer'>
             <a className='footer__link' href='/'><span className='footer__link__text'>Hem</span></a>
@@ -8,4 +7,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default FooterComp

@@ -6,10 +6,11 @@ body {
   color: black;
   background-color: antiquewhite;
 }
-[data-theme="dark"] body {
+[data-theme="dark"] body{
   background-color: black;
   color: antiquewhite;
 }
+
 .embla {
   max-width: 48rem;
   margin: auto;
